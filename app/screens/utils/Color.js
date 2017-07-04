@@ -18,7 +18,8 @@ const color = {
     primaryText: '#212121',
     secondaryText: '#757575',
     divider: '#bdbdbd',
-    cardColor : 'rgba(2,136,209 ,1)'
+    cardColor : 'rgba(2,136,209 ,1)',
+    badgeColor: 'rgba(48,63,159 ,1)'
 } 
 
 export default color

@@ -14,6 +14,7 @@ import {
   KeyboardAvoidingView
 } from 'react-native';
 
+
 import AnimatedEditText from '../components/AnimatedEditText'
 import Button from '../components/Button'
 
@@ -50,7 +51,7 @@ export default class Login extends Component {
                 username: this.username,
                 password: this.password
             }
-            fetch(Config.baseUrl + Config.loginUri, {
+        fetch(Config.baseUrl + Config.loginUri, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -61,6 +62,9 @@ export default class Login extends Component {
             
         })
         .then((response) => response.json())
+        
+        
+        
         .then((jsonResponse) => {
             
             if (!jsonResponse.data && jsonResponse.code === 404) {
@@ -81,10 +85,26 @@ export default class Login extends Component {
 
   
   _handlePress = (data) => {
-    
-    const { navigate } = this.props.navigation;
-    navigate('Tabs', {
-        credentials : data
+    let accountsUrl =  Config.baseUrl + Config.customersUri + '/' + data.username + '/accounts'
+    //console.log(data.authKey)
+    fetch(accountsUrl, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'AUTH-SECURITY-TOKEN': data.authKey
+      }
+    })
+    .then(response => response.json())
+    .then(jsonResponse => {
+      console.log(jsonResponse)
+      const { navigate } = this.props.navigation;
+
+      navigate('Tabs', {
+          credentials : data,
+          accounts : jsonResponse.data
+      })
+
     })
   }
 

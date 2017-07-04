@@ -4,7 +4,10 @@ const Config = {
     customersUri: '/api/customers',
     inquiryUri: '/api/banking-txn/inquiry',
     statementUri: '/api/banking-txn/statement',
-    merchantUri: '/api/merchants'
+    merchantUri: '/api/merchants',
+    banksUri: '/api/banks',
+    fundTransferRequestUri : '/api/banking-txn/transfer/account/request',
+    fundTransferConfirmUri: '/api/banking-txn/transfer/account/confirm'
     
 }
 

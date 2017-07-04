@@ -15,6 +15,7 @@ import {
   ScrollView
 } from 'react-native'
 import Config from '../utils/Config'
+import color from '../utils/Color'
 import moment from 'moment'
 
 import Icon from 'react-native-vector-icons/Ionicons'
@@ -131,7 +132,15 @@ export default class ScaleView extends React.Component {
                 alignItems: 'center',
                 justifyContent: 'center'
             }}>
-            <Icon name={"ios-cube"} size={25} color={'white'} />
+            <View style={{
+                backgroundColor: color.badgeColor,
+                height: 100,
+                width: 60,
+                justifyContent: 'center',
+                alignItems: 'center'
+            }}>
+            <Icon name={"md-book"} size={25} color={'white'} />
+            </View>
             <Text style={styles.text}>
                 {nickName}
             </Text>
@@ -495,21 +504,21 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     buttonContainer: {
-        backgroundColor : 'rgba(33,150,243 ,1)',
-        height: 90,
-        borderRadius: 5,
+        backgroundColor : 'rgba(255, 255, 255, 1)',
+        height: 70,
+        borderRadius: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingLeft: 10,
+        
         margin: 5,
         
 
     },
     text: {
-        fontSize:25,
-        color: 'rgba(255, 255, 255, 1)',
-        fontWeight: '600',
+        fontSize:19,
+        color: 'rgba(0, 0, 0, 0.7)',
+        fontWeight: '500',
         marginLeft: 10
     },
     verifiedContainer: {
@@ -530,7 +539,7 @@ const styles = StyleSheet.create({
     menuContainer: {
         height: 160,
         backgroundColor: '#DE3641',
-        borderRadius: 5,
+        borderRadius: 2,
         marginLeft: 5,
         marginRight: 5
     },
@@ -538,7 +547,7 @@ const styles = StyleSheet.create({
         //rgba(139,195,74 ,1)
         height: 100,
         backgroundColor: '#66787E',
-        borderRadius: 5,
+        borderRadius: 2,
         marginLeft: 5,
         marginRight: 5,
         marginBottom: 5
@@ -546,7 +555,7 @@ const styles = StyleSheet.create({
     statementContainer: {
         height: 330,
         backgroundColor: '#66787e',
-        borderRadius: 5,
+        borderRadius: 2,
         marginLeft: 5,
         marginRight: 5,
         marginBottom: 5,

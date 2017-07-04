@@ -84,7 +84,9 @@ class MerchantItem extends React.Component {
 
     render() {
         return (
-            <Interactable.View style={styles.merchantItemContainer}>
+            <Interactable.View style={styles.merchantItemContainer}
+                snapPoints={[{x: 0}]}
+                horizontalOnly={true}>
                 <View style={{
                     flex: 0.8,
                     justifyContent: 'center',
@@ -158,7 +160,7 @@ class MerchantItem extends React.Component {
 const styles = StyleSheet.create({
     merchantItemContainer: {
         height: 80,
-        backgroundColor: 'rgba(0, 0, 0, 0.01)',
+        backgroundColor: 'rgba(0, 0, 0, 0.03)',
         borderBottomWidth: 0.3,
         borderColor: 'rgba(0, 0, 0, 0.3)',
         marginLeft: 7,

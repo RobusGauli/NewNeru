@@ -10,6 +10,15 @@ import {
     TouchableHighlight
 } from 'react-native'
 
+import {
+  getTheme,
+} from 'react-native-material-kit';
+
+import Config from '../utils/Config'
+
+
+const theme = getTheme()
+
 import Interactable from 'react-native-interactable'
 
 import Icon from 'react-native-vector-icons/Ionicons'
@@ -19,7 +28,9 @@ export default class BankingView extends React.Component {
     constructor(props) {
         super(props)
         
+        
     }
+
 
     componentDidMount = () => {
         
@@ -33,9 +44,14 @@ export default class BankingView extends React.Component {
             const { params } = this.props.navigation.state;
             const { navigate } = this.props.navigation
 
+            
             navigate('FundTransfer', {
-                credentials: params.credentials
+                credentials: params.credentials,
+                accounts: params.accounts
             })
+
+            
+            
         } 
 
         if (text === 'INQUIRY') {
@@ -52,19 +68,20 @@ export default class BankingView extends React.Component {
     }
 
     render() {
+        console.log('I am from the banking tab')
         const { data } = this.props;
         return (
             <ScrollView style={styles.container}>
-                <View style={styles.cardContainer}>
+                
                     
                     <Card color={color.cardColor} text='FUND TRANSFER' iconName={'md-paper-plane'} nameIs={() => this._onButtonPressed('TRANSFER', data)} />
+                    <Card color={color.cardColor} text='SELF TRANSFER' iconName={'md-infinite'} nameIs={() => this._onButtonPressed('INQUIRY', data)}/>
                     <Card color={color.cardColor} text='INQUIRY' iconName={'md-cash'} nameIs={() => this._onButtonPressed('INQUIRY', data)}/>
                     <Card color={color.cardColor} text='FOREX' iconName={'logo-usd'} nameIs={() => this._onButtonPressed('FOREX')}/>
                     <Card color={color.cardColor} text='GENERAL' iconName={'md-card'} nameIs={() => this._onButtonPressed('GENERAL')}/>
                     <Card color={color.cardColor} text='EXTRA' iconName={'md-apps'} nameIs={() => this._onButtonPressed('EXTRA')}/>
                    
-               </View>
-               
+                              
             
             </ScrollView>
         )
@@ -73,16 +90,28 @@ export default class BankingView extends React.Component {
 const Card = (props) => {
     return (
         <TouchableNativeFeedback onPress={() => props.nameIs()}>
-        <View style={[styles.card, {backgroundColor : props.color}]}
+        {/*<View style={[theme.cardStyle, {marginLeft: 10, marginRight: 10, marginBottom: 3, }]}
             >
             <Icon
                 name={props.iconName}
                 size = {30}
                 style={{marginBottom : 10}}
-                color={'rgba(255, 255, 255, 0.8)'} />
-            <Text style={{fontSize : 22, color: 'rgba(255, 255, 255, 0.8)', fontWeight: '400'}}>{props.text}</Text>
+                color={'rgba(0, 0, 0, 0.8)'} />
+            <Text style={{fontSize : 17, color: 'rgba(0, 0, 0, 0.8)', fontWeight: '400'}}>{props.text}</Text>
             
 
+        </View> */}
+        <View style={[ styles.card, theme.cardStyle]} >
+            <View style={styles.badge}>
+                <Icon
+                name={props.iconName}
+                size = {25}
+                style={{marginBottom : 10}}
+                color={'rgba(255, 255, 255, 1)'} />
+            </View>
+            <Text style={styles.text}>
+                {props.text}
+            </Text>
         </View>
         </TouchableNativeFeedback>
     )
@@ -96,19 +125,34 @@ const CardRow = (props) => {
 }
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        backgroundColor: 'rgba(255, 255, 255,0.1)',
+        padding: 5
     },
-    cardContainer : {
-        flexDirection : 'column',
-        backgroundColor: 'rgba(120,144,156 ,0.3)'
-    },
+    
     card : {
         flex : 1, 
-        backgroundColor : 'rgba(0, 0, 0, 1)',
-        height : 100, 
+        backgroundColor : 'rgba(255, 255, 255, 0.8)',
+        height : 80, 
         margin : 6,
         justifyContent : 'center',
-        alignItems : 'center'
+        alignItems : 'center',
+        marginRight: 10
+
+    },
+    text: {
+        fontSize :17,
+
+        fontWeight: '500'
+    },
+    badge: {
+        height: 80,
+        backgroundColor: color.badgeColor,
+        position: 'absolute',
+        left: 0,
+        width : 80,
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 
 })

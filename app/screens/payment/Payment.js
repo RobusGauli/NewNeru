@@ -8,6 +8,14 @@ import {
     TouchableNativeFeedback
 } from 'react-native'
 
+import {
+  getTheme,
+
+} from 'react-native-material-kit';
+
+
+const theme = getTheme()
+import color from '../utils/Color'
 import Icon from 'react-native-vector-icons/Ionicons'
 
 export default class PaymentView extends React.Component {
@@ -28,6 +36,7 @@ export default class PaymentView extends React.Component {
     }
 
     render() {
+        console.log('i am from payment shit')
         return (
             <ScrollView style={styles.container}>
                 <View style={styles.cardContainer}>
@@ -51,27 +60,35 @@ export default class PaymentView extends React.Component {
     }
 }
 const Card = (props) => {
-
-    const {
-        onPress
-    } = props
-
     return (
-        <TouchableNativeFeedback onPress={() => onPress()}>
-        <View style={[styles.card, {backgroundColor : props.color}]}
+        <TouchableNativeFeedback onPress={() => props.onPress()}>
+        {/*<View style={[theme.cardStyle, {marginLeft: 10, marginRight: 10, marginBottom: 3, }]}
             >
             <Icon
                 name={props.iconName}
                 size = {30}
                 style={{marginBottom : 10}}
-                color={'rgba(255, 255, 255, 0.8)'} />
-            <Text style={{fontSize : 22, color: '#rgba(255, 255, 255, 0.8)'}}>{props.text}</Text>
+                color={'rgba(0, 0, 0, 0.8)'} />
+            <Text style={{fontSize : 17, color: 'rgba(0, 0, 0, 0.8)', fontWeight: '400'}}>{props.text}</Text>
             
 
+        </View> */}
+        <View style={[ styles.card, theme.cardStyle]} >
+            <View style={styles.badge}>
+                <Icon
+                name={props.iconName}
+                size = {25}
+                style={{marginBottom : 10}}
+                color={'rgba(255, 255, 255, 0.8)'} />
+            </View>
+            <Text style={styles.text}>
+                {props.text}
+            </Text>
         </View>
         </TouchableNativeFeedback>
     )
 }
+
 
 const CardRow = (props) => {
     return (
@@ -80,20 +97,35 @@ const CardRow = (props) => {
     )
 }
 const styles = StyleSheet.create({
-    container: {
-        flex: 1
+   container: {
+        flex: 1,
+        backgroundColor: 'rgba(255, 255, 255,0.1)',
+        padding: 5
     },
-    cardContainer : {
-        flexDirection : 'column',
-        backgroundColor: 'rgba(120,144,156 ,0.3)'
-    },
+    
     card : {
         flex : 1, 
-        backgroundColor : 'rgba(0, 0, 0, 1)',
-        height : 100, 
+        backgroundColor : 'rgba(255, 255, 255, 0.8)',
+        height : 80, 
         margin : 6,
         justifyContent : 'center',
-        alignItems : 'center'
+        alignItems : 'center',
+        marginRight: 10
+
+    },
+    text: {
+        fontSize :17,
+
+        fontWeight: '500'
+    },
+    badge: {
+        height: 80,
+        backgroundColor: color.badgeColor,
+        position: 'absolute',
+        left: 0,
+        width : 80,
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 
 })
